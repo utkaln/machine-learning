@@ -1,6 +1,5 @@
 import math, copy
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Load our data set
 x_train = np.array([1.0, 2.0])   #features
@@ -21,16 +20,7 @@ def compute_cost(x, y, w, b):
   
 
 def compute_gradient(x, y, w, b): 
-    """
-    Computes the gradient for linear regression 
-    Args:
-      x (ndarray (m,)): Data, m examples 
-      y (ndarray (m,)): target values
-      w,b (scalar)    : model parameters  
-    Returns
-      dj_dw (scalar): The gradient of the cost w.r.t. the parameters w
-      dj_db (scalar): The gradient of the cost w.r.t. the parameter b     
-     """
+    
     
     # Number of training examples
     m = x.shape[0]    
@@ -48,8 +38,6 @@ def compute_gradient(x, y, w, b):
         
     return dj_dw, dj_db
 
-# Plot the gradient descent
-plt_gradients(x_train,y_train, compute_cost, compute_gradient)
-plt.show()
+
 
 
