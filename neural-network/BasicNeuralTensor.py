@@ -6,6 +6,7 @@ from keras.layers import Dense, Input
 from keras import Sequential
 from keras.losses import MeanSquaredError, BinaryCrossentropy
 from keras.activations import sigmoid
+from LoadLogRegData import loadData
 
 import logging
 logging.getLogger("tensorflow").setLevel(logging.ERROR)
@@ -35,9 +36,9 @@ print(f"w: {w}\nb: {b}")
 # ==========================
 # More advanced example of Tensorflow
 
-X = np.array([[185.32,  12.69], [259.92, 11.87], [231.01,  14.41], [175.37,  11.72], [187.12,  14.13],[225.91,  12.1 ],[208.41,  14.18], [207.08,  14.03],[280.6,   14.23], [202.87,  12.25]])
-Y = np.array([[1.],[0.], [0.], [0.], [1.], [1.],[0.],[0.],[0.],[1.]])
-
+#X = np.array([[185.32,  12.69], [259.92, 11.87], [231.01,  14.41], [175.37,  11.72], [187.12,  14.13],[225.91,  12.1 ],[208.41,  14.18], [207.08,  14.03],[280.6,   14.23], [202.87,  12.25]])
+#Y = np.array([[1.],[0.], [0.], [0.], [1.], [1.],[0.],[0.],[0.],[1.]])
+X, Y = loadData()
 # Normalize Data
 norm_1 = tf.keras.layers.Normalization(axis=-1)
 norm_1.adapt(X)
