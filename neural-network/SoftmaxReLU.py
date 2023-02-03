@@ -17,11 +17,12 @@ x_train, y_train = make_blobs(n_samples=2000, centers=seed_data, cluster_std=1.0
 # Define model and layers
 softmax_model = Sequential(
     [
-      Dense(25, activation='relu'),
-      Dense(15, activation='relu'),
-      Dense(4, activation='linear')
+      Dense(25, activation='relu', name='L1'),
+      Dense(15, activation='relu', name='L2'),
+      Dense(4, activation='linear', name='L3'),
     ]
 )
+
 
 # Compute loss
 softmax_model.compile(
@@ -37,8 +38,3 @@ print(f"max value of predictions: \n{np.max(predictions)}")
 # convert prediction to softmax probabilities
 sm_predictions = tf.nn.softmax(predictions).numpy()
 print(f"max value of softmax predictions: \n {np.max(sm_predictions)}")
-
-
-                                                                           
-
-

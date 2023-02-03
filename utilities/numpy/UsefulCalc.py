@@ -25,3 +25,15 @@ dA = diff(A,b)
 
 print(f"Differential of A: {A} is dA: {dA}")
 
+
+## Softmax calculation
+def compute_softmax(z):
+    a = np.empty(0)
+    denom = 0.
+    for i in range (len(z)):
+        denom += np.exp(z[i])
+    for j in range (len(z)):
+        a = np.append(a,np.exp(z[j])/denom)
+    return a
+
+print(f"softmax output --> {compute_softmax(np.array([1.,2.,3.,4.]))}")
