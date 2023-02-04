@@ -59,9 +59,7 @@ x_val, x_test, y_val, y_test = train_test_split(x_,y_,test_size=0.5, random_stat
 del x_, y_
 
 print(f"Shape of X -> {x_data.shape}\nShape of Y -> {y_data.shape}")
-print(f"Shape of x_train -> {x_train.shape}\nShape of y_train -> {y_train.shape}")
-print(f"Shape of x_val -> {x_val.shape}\nShape of y_val -> {y_val.shape}")
-print(f"Shape of x_test -> {x_test.shape}\nShape of y_test -> {y_test.shape}")
+
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
@@ -76,9 +74,6 @@ scaler_linear = StandardScaler()
 
 # Compute mean and std dev of training data and transform
 x_train_scaled = scaler_linear.fit_transform(x_train)
-print("Training Data Tranformation -->")
-print(f"mean -> {scaler_linear.mean_}")
-print(f"std dev -> {scaler_linear.scale_}")
 
 # Train model
 linear_model = LinearRegression()
@@ -87,7 +82,7 @@ linear_model.fit(x_train_scaled, y_train)
 # Initial prediction
 y_hat = linear_model.predict(x_train_scaled)
 mse = mean_squared_error(y_true=y_train, y_pred=y_hat)/2 # scikit returns without dividing by 2, hence done
-print(f"mse on training -> {mse}")
+# print(f"mse on training -> {mse}")
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
 # Step 3 - Evaluate Model 
@@ -100,9 +95,9 @@ print(f"mse on training -> {mse}")
 # To do this use tranform() method of sci kit instead of fit_transform() from before
 x_val_scaled = scaler_linear.transform(x_val)
 
-print("Validation Data Tranformation -->")
-print(f"mean -> {scaler_linear.mean_}")
-print(f"std dev -> {scaler_linear.scale_}")
+# print("Validation Data Tranformation -->")
+# print(f"mean -> {scaler_linear.mean_}")
+# print(f"std dev -> {scaler_linear.scale_}")
 
 # Enhanced y_hat with validation data
 y_hat = linear_model.predict(x_val_scaled)
@@ -110,7 +105,7 @@ y_hat = linear_model.predict(x_val_scaled)
 # Measure prediction error between training data and validation data using Mean Squared Error (MSE)
 # j_wb = (1/(2*count))* sum of ((x_train[i] - y_train[i])**2)
 mse = mean_squared_error(y_true=y_val, y_pred=y_hat)/2
-print(f"mse on validation -> {mse}")
+# print(f"mse on validation -> {mse}")
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
@@ -130,7 +125,7 @@ model = LinearRegression()
 model.fit(x_train_poly_scaled, y_train)
 y_hat = model.predict(x_train_poly_scaled)
 mse = mean_squared_error(y_true=y_train, y_pred=y_hat)/2
-print(f"mse on poly training -> {mse}")
+# print(f"mse on poly training -> {mse}")
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
 # Step 5 - Evaluate Model with Polynomial Features 
@@ -144,7 +139,7 @@ x_val_poly_scaled = scaler_poly.transform(x_val_poly)
 # Predict with poly data scaled
 y_hat = model.predict(x_val_poly_scaled)
 mse = mean_squared_error(y_true=y_val, y_pred=y_hat)/2
-print(f"mse on poly validation -> {mse}")
+# print(f"mse on poly validation -> {mse}")
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
@@ -174,6 +169,7 @@ for degree in range(1,11):
   # Prediction and MSE
   y_hat = model.predict(x_train_poly_scaled)
   train_mse = mean_squared_error(y_true=y_train, y_pred=y_hat)/2
+  print(f"DEGREE: {degree} , MSE: {train_mse}")
   train_mses.append(train_mse)
 
   # Add polynomial features and scale the cross validation set
