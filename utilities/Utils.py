@@ -1,5 +1,6 @@
 import numpy as np
 from sympy import  symbols, diff
+from sklearn.model_selection import train_test_split
 
 
 # Find exponential value where e ~ 2.718
@@ -37,3 +38,16 @@ def compute_softmax(z):
     return a
 
 print(f"softmax output --> {compute_softmax(np.array([1.,2.,3.,4.]))}")
+
+
+# Load data from CSV file
+def load_data_csv(filename):
+    return np.loadtxt(filename, delimiter=",")
+
+def split_data(data):
+    x = data[:,:-1]
+    y = data[:,-1]
+    x_train, x_, y_train, y_ = train_test_split(x,y,test_size=0.4, random_state=1)
+    x_val, x_test, y_val, y_test = train_test_split(x_,y_,test_size=0.5, random_state=1)
+    del x_, y_
+    return x_train, x_val, x_test, y_train, y_val, y_test
