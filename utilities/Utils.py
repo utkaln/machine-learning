@@ -51,3 +51,8 @@ def split_data(data):
     x_val, x_test, y_val, y_test = train_test_split(x_,y_,test_size=0.5, random_state=1)
     del x_, y_
     return x_train, x_val, x_test, y_train, y_val, y_test
+
+
+def load_data_raw(filename):
+    X = np.load(filename)
+    return X
