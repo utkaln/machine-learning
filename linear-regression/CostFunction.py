@@ -19,8 +19,7 @@ def compute_cost(x, y, w, b):
     return total_cost
   
 
-def compute_gradient(x, y, w, b): 
-    
+def compute_gradient(x, y, w_start_val, b_start_val): 
     
     # Number of training examples
     m = x.shape[0]    
@@ -28,7 +27,7 @@ def compute_gradient(x, y, w, b):
     dj_db = 0
     
     for i in range(m):  
-        f_wb = w * x[i] + b 
+        f_wb = w_start_val * x[i] + b_start_val 
         dj_dw_i = (f_wb - y[i]) * x[i] 
         dj_db_i = f_wb - y[i] 
         dj_db += dj_db_i
@@ -37,6 +36,8 @@ def compute_gradient(x, y, w, b):
     dj_db = dj_db / m 
         
     return dj_dw, dj_db
+
+def gradient_descent():
 
 
 
