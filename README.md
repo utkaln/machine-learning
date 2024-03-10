@@ -7,6 +7,14 @@
     - Linear Classification
   - Unsupervised Learning
 
+- In Linear Regression and Logistic Regression 4 basic steps are followed
+1. Find Prediction aka **Regression Equation** that takes the shape of `f(x) = mx + b`
+2. From Regression Equation Find **Cost Function**
+3. From Cost Function, Find **Gradient Derivative** to understand how cost function gets minimized
+4. From Gradient Derivative, apply learning rate and run multiple iterations to final optimal values of parameters w,b using **Gradient Descent Function**
+
+- Using the final parameter values w,b the prediction gets more accurate
+
 
 
 ## Linear Regression
@@ -31,6 +39,8 @@
 - Is a small number by which the grdient descent shifts with every step
 - If Learning Rate is too small, then the process takes long time but high chances of finding the right minimum
 - If Learning Rate is too large, then there is a chance it will overshoot the minimum and will never converge on the solution
+- To test out if the learning rate is converging start with a small value of learning rate such as 0.001, then change to 0.01 then to 0.1 etc. until the learning rate shows less and less value of gradient descent
+
 
 #### Derivate of Coefficients
 - Derivate of coefficient provides position of slope of cost function at a given point, thus showing whether it is getting closer to minimum value of drifting away from it
@@ -47,6 +57,20 @@
   - Z Score Normalization
 - **Mean Normalization**: Subtract the feature value from the mean feature value and divide by the range of the feature value
 - **Z Score Normalization** : Subtract the feature value from the mean feature value and divide by the Standard Deviation of the feature value
+
+### Feature Engineering
+- Combining or dropping some features to make a new feature to enhance the learning rate and get a higher accuracy in prediction
+
+### Polynomial Regression
+- When the features increase by degrees such as : `f(x) = w1x + w2x**2 + w3x**3 + w4x**0.5 ...`
+
+
+## Logistic Regression aka Classification
+- Sigmoid function is the equivalent of linear regression equation. It is also known as Logistic Function
+
+![Logistic-Regression-Function](./images/logistic-regression.png)
+- 
+
 
 
 ## Using Python for Machine Learning

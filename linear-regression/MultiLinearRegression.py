@@ -60,7 +60,7 @@ def gradientDescent(x,y,w,b, alpha, iterations):
     if i<10000:
       cost_history.append(cost_regression(x,y,w_temp,b))
     
-    print(f"Iteration -> {i}, cost -> {cost_history}")
+    # print(f"Iteration -> {i}, cost -> {cost_history}")
   
   return w_temp, b, cost_history
 
