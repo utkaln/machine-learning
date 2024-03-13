@@ -69,7 +69,24 @@
 - Sigmoid function is the equivalent of linear regression equation. It is also known as Logistic Function
 
 ![Logistic-Regression-Function](./images/logistic-regression.png)
-- 
+
+
+### Decision Boundary for Logistic Regression
+- Decision Boundary is the probability at which a decision is made to consider the cutoff for a result as positive or negative
+- Example: In a more sensitive case, a probability of 0.8 or higher could be consider as positive and in a less sensitive case, a probability of 0.5 or higher can be considered as a Positive result 
+- In Logistic Regression z =(w.x + b) if >= 0 then y = 1 otherwise 0 
+
+### Cost Function of Logistic Regression
+- Squared Error Cost used in Linear Regression would not converge into forming a convex arc in case of Logistic Regression, hence it would not find a global minimum
+- Thus Logistic Regression uses a different method to find cost 
+
+![cost function log classification](./images/Log-reg-cost-fn.png)
+
+### Gradient Descent of Logistic Regression
+- Gradient Descent gradually adjusts the cost function by changing w and b to finally bring the cost to minimum
+- Similar in structure to that of linear regression
+![log-reg-gradient-descent](./images/log-reg-gradient-descent.png)
+
 
 
 

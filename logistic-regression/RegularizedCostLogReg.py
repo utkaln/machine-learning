@@ -1,5 +1,5 @@
 import numpy as np
-np.set_printoptions(precision=8)
+from LogRegCostFunction import log_reg_cost_fn, sigmoid_fn
 
 def regulated_cost_calc(w,m,n,l):
     regulated_cost = 0
@@ -8,28 +8,15 @@ def regulated_cost_calc(w,m,n,l):
     regulated_cost = regulated_cost * (l / (2*m))
     return regulated_cost
 
-def compute_cost_log_reg(x,y,w,b):
-    m = x.shape[0]
-    cost = 0
-    for i in range(m):
-        z_i = np.dot(x[i],w) + b
-        f_wb_i  = sigmoid(z_i)
-        cost += -y[i]*np.log(f_wb_i) - (1-y[i])*np.log(1-f_wb_i)
-    cost = cost / (m)
-    return cost
-
-def sigmoid(z):
-  return 1/(1+np.exp(-z))
 
 def regularized_lin_reg_cost(x,y,w,b,l):
     m = x.shape[0]
     n = len(w)
-    cost = compute_cost_log_reg(x,y,w,b)
+    cost = log_reg_cost_fn(x,y,w,b)
     regulated_cost = regulated_cost_calc(w,m,n,l)
     
     total_cost = cost + regulated_cost
     return total_cost
-
 
 
 
@@ -61,7 +48,7 @@ def derivative_log_reg(x,y,w,b):
     
     for i in range(m):
         z_i = np.dot(x[i],w) + b
-        f_wb_i = sigmoid(z_i)
+        f_wb_i = sigmoid_fn(z_i)
         err = f_wb_i - y[i]
         for j in range(n):
             dj_dw[j] = dj_dw[j] + err * x[i,j]
@@ -90,7 +77,7 @@ def predict(x, w, b):
     # Loop over each example
     for i in range(m):   
         z_wb = np.dot(x[i],w) + b
-        f_wb = sigmoid(z_wb)
+        f_wb = sigmoid_fn(z_wb)
         
 
         # Apply the threshold
