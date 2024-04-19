@@ -6,6 +6,7 @@
     - [Linear Regression](RegressionClassification.md)
     - [Logistic Classification](RegressionClassification.md)
     - [Neural Network](NeuralNetwork.md)
+    - [Finetune Models](FineTuneModels.md)
   - Unsupervised Learning
 
 
