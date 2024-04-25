@@ -3,63 +3,9 @@ import tensorflow as tf
 from keras.layers import Dense
 from keras import Sequential, optimizers, losses
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.metrics import mean_squared_error
-
-# Split data to training 60%, validation 20%, test 20%
-# Accepts 2D array (matrix) 
-def split_data(x,y):
-    # Get 60% of the dataset as the training set. Put the remaining 40% in temporary variables: x_ and y_.
-    x_train, x_temp, y_train, y_temp = train_test_split(x, y, test_size=0.40, random_state=1)
-
-    # Split the 40% subset above into two: one half for cross validation and the other for the test set
-    x_cv, x_test, y_cv, y_test = train_test_split(x_temp, y_temp, test_size=0.50, random_state=1)
-
-    # Delete temporary variables
-    del x_temp, y_temp  
-
-    return [x_train, y_train, x_cv, y_cv, x_test, y_test]
-
-
-# Build model utility
-# define how to build models
-def build_nn_models():
-    tf.random.set_seed(20)
-    model_1 = Sequential(
-        [
-            Dense(25, activation='relu'),
-            Dense(15, activation='relu'),
-            Dense(1, activation='sigmoid')
-        ],
-        name='model_1_classification'
-    )
-
-    model_2 = Sequential(
-        [
-            Dense(20, activation='relu'),
-            Dense(12, activation='relu'),
-            Dense(12, activation='relu'),
-            Dense(20, activation='relu'),
-            Dense(1, activation='sigmoid')
-        ],
-        name='model_2_classification'
-    )
-
-    model_3 = Sequential(
-        [
-            Dense(32, activation='relu'),
-            Dense(16, activation='relu'),
-            Dense(8, activation='relu'),
-            Dense(4, activation='relu'),
-            Dense(12, activation='relu'),
-            Dense(1, activation='sigmoid')
-        ],
-        name='model_3_classification'
-    )
-
-    return [model_1, model_2, model_3]
-
+from FineTuneUtils import split_data, build_nn_models
 
 
 data = np.loadtxt('./data/data_1.csv', delimiter=',')
