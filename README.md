@@ -7,6 +7,7 @@
     - [Logistic Classification](RegressionClassification.md)
     - [Neural Network](NeuralNetwork.md)
     - [Finetune Models](FineTuneModels.md)
+    - [Decision Trees](DecisionTrees.md)
   - Unsupervised Learning
 
 
