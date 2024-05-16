@@ -38,13 +38,13 @@
 
 
 ## Prompt Engineering
-- Prompot Engineering is a model where the Model predicts text based on the In-context learning (ICL)
+- Prompt Engineering is a model where the Model predicts text based on the In-context learning (ICL)
 - Prompt Engineering has Four important parts
     - **Prompt** : The ask. Example: Classify this review
     - **In-context Learning (ICL)** : Provide some context or example
-        - Zero shot Inference: No example given. Large models perform well with this
-        - One shot Inference: One example is provided along with the prompt
-        - Few shot Inference: Multiple example with different output classes
+        - **Zero shot Inference**: No example given. Large models perform well with this
+        - **One shot Inference**: One example is provided along with the prompt
+        - **Few shot Inference**: Multiple example with different output classes
     - **Inference** : Model Processing
     - **Completion**: Output that comprises of the original input and the predicted output
 - If more examples are not helping, instead of adding more examples, consider finetuning the model
@@ -60,9 +60,73 @@
     - `top p sampling` : helps limit random sampling by allowing max. total probability by picking tokens with probability
     - `Temperature` : Controls shape of the probability. Higher the temperature - higher randomness. This is scaling factor applied at final layer of Softmax layer to pick the next token based on probability distribution. In contranst to top k or top p, with low temperature setup it picks random sampling and outputs the highest probability. With high temperature it picks wider probability distribution 
 
+## Generative AI Project Life Cycle
+1. **Define Usecase** : Example: Summarization, Translation, Single Task, Invoke APIs 
+2. **Choose Model** : Choose pretrained model or train a model yourself
+3. **Adapt and Align Model** : 
+    - Prompt Engineering
+    - Fine-tuning
+    - Align with human feedback
+    - Evaluate
+4. **Optimize and Deploy for Inference**
+5. **Additional Infrastructure of Dependency**
 
 
+## LLM Pretraining Process
 
+### Input Data Selection
+- Input is at PB level of unstructured data such as scraping web etc
+- Model internalizes pattern from the language
+- Model weights are adjusted to minimize error
+- All the tokenized strings are converted to Vector Embedding
+- Data quality filter is applied on the input data to ensure accuracy, filter out harmful info. As a result about 1 - 3% data from publicly available unstructured data is used
+
+### Tranformer Choices
+| Attribute | Encoder Only | Decoder Only (most common) | Both Encoder Decoder | 
+| --- | --- | --- | --- |
+| Also Known As | Autoencoding Models | | Translation | 
+| Trained With | Masked Language Modeling (MLM) | Causal Language Modeling (CLM) | Sequence to Sequence Model |
+| Core Concept | Bidirectional Context | Unidirectional Context | Span Corruption* | 
+| Key Objective | Reconstruct Text | Predict Next Token | Reconstruct Span |
+| Use cases | Sentiment Analysis, Named Entity Recognization, Word Classification | Text Generation | Translation, Summarization, Question Answer |
+| Known Models | BERT, ROBERTA  | GPT, LlaMa, BLOOM | T5, BART |
+ 
+- **Span Corruption** : is a modeling technique where random sequences of input tokens are masked. These mask tokens are replaced with Sentinel tokens. Sentinel tokens are special tokens placed as replacements of words, but these do not mean any words by themselves. The model then auto generates the masked words. The output is the Sentinel token followed by the predicted texts for the masked words.   
+
+## Challenges of Models
+- **GPU Needs** : Models require more GPU that is proportionate to number of parameters and the factor of accuracy. Following are the factors that directly influence the GPU requirements.
+    - Model Parameters (Weights) : 4 bytes / parameter (1B parameters -> 4GB)
+    - Adam Optimizer : 8 bytes / parameter
+    - Gradients : 4 bytes / parameter
+    - Activations (Temporary Memory) : 8 bytes / parameter
+- Thus though the model parameters need only 4 bytes, it requires almost 20 extra bytes for other things. For example to train with 1B parameters total GPU memory needed is 24GB 
+
+### Quantization - Scaling Process
+- This is a Scaling process where the memory requirement is reduced by reducing accuracy. Such as instead of storing a number as 32 bit floating point, store it as 16 bit or 8 bit
+- GPU requirement can be reduced by half with Quantization even though all the models can have same number of parameters
+- BFLOAT16 is a model that is preferred as it is space saver similar to that of 16 bit as well as the accuracy is similar to that of 32 bits  
+- Order of memory requirements : **FP32** (4 bytes) > **BFLOAT16** (2 bytes) = **FP16** (2 bytes) > **Integer** (1 byte)
+
+### Parallel Processing via Distributed GPUs
+- This is a process where parallel processing of data is done via distributed GPUs, thus leveraging a more cost effective option of horizontal scaling of computing resource in contrast to vertical scaling
+ 
+#### Distributed Data Parallel (DPU) by PyTorch
+- 
+
+### Scaling Choices
+- To maximize performance (Minimize Loss) of a model, 3 main levers play a role:
+1. Training Data Size
+2. Number of Parameters
+3. Computing Resource cost (GPU)
+- Similar to CAP theorem not everything can be achieved once. So to maximize performance two or less of the factors can be focussed upon
+- **Unit of Compute** : Usually represented as 1 Peta-FLOP per day. FLOP is floating point operations
+- This is equivalent of 8 NVIDIA V100 GPUs working in parallel or 2 NVIDIA A100 GPUs
+- **Chinchilla Model** : Research papers Provides optimum number of parameters and training data volume given a set of computing constraint
+    - Data size should be 20 times more than Number of Parameters: `Training Data = 3 x Parameters`
+    - LlaMa and Bloomberg GPT are few models those are designed after Chinchilla research
+
+### Pre-training for Domain Adaptation
+- If the domain has a niche set of language, for example specific to law practice or medical practice etc. then it is important to pre-train the model using own training data instead of relying on available data from general public domain
 
 
 
