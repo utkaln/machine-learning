@@ -1,0 +1,8 @@
+# Site Settings
+title: Machine Learning Concepts
+author:
+  name: Utkal Nayak
+  email: nayak.utkal@gmail.com
+
+# Build settings
+remote_theme: jekyll/minima
