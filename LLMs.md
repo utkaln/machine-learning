@@ -140,7 +140,7 @@
 - This is equivalent of 8 NVIDIA V100 GPUs working in parallel or 2 NVIDIA A100 GPUs
 - For a perspective if a model that has about 3B parameter uses about 100 Petaflop GPU per day to pretrain, a GPT-3 like model which has 175B parameters may take close to 3700 Petaflop GPUs
 - **Chinchilla Model** : Research papers Provides optimum number of parameters and training data volume given a set of computing constraint
-    - Data size should be 20 times more than Number of Parameters: `Training Data = 3 x Parameters`
+    - Data size should be 20 times more than Number of Parameters: `Training Data = 20 x Parameters`
     - LlaMa and Bloomberg GPT are few models those are designed after Chinchilla research
 
 ### Pre-training for Domain Adaptation
