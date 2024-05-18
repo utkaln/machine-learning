@@ -1,3 +1,8 @@
+---
+layout: page
+---
+# Transformers and LLMs
+
 ## Text Generation Before Transformers
 - **RNN** : 
     - Limitation : To successfully predict required huge scalability
@@ -95,10 +100,10 @@
 
 ## Challenges of Models
 - **GPU Needs** : Models require more GPU that is proportionate to number of parameters and the factor of accuracy. Following are the factors that directly influence the GPU requirements.
-    - Model Parameters (Weights) : 4 bytes / parameter (1B parameters -> 4GB)
-    - Adam Optimizer : 8 bytes / parameter
-    - Gradients : 4 bytes / parameter
-    - Activations (Temporary Memory) : 8 bytes / parameter
+    - `Model Parameters (Weights) : 4 bytes / parameter` (1B parameters -> 4GB)
+    - `Adam Optimizer : 8 bytes / parameter`
+    - `Gradients : 4 bytes / parameter`
+    - `Activations (Temporary Memory) : 8 bytes / parameter`
 - Thus though the model parameters need only 4 bytes, it requires almost 20 extra bytes for other things. For example to train with 1B parameters total GPU memory needed is 24GB 
 
 ### Quantization - Scaling Process
@@ -110,8 +115,23 @@
 ### Parallel Processing via Distributed GPUs
 - This is a process where parallel processing of data is done via distributed GPUs, thus leveraging a more cost effective option of horizontal scaling of computing resource in contrast to vertical scaling
  
-#### Distributed Data Parallel (DPU) by PyTorch
-- 
+#### Distributed Data Parallel (DDP) by PyTorch
+- Batch of data copied to multiple GPUs that has the LLM available on each
+- Each data set is processed in parallel as forward and backward pass 
+- After that a synchronization process runs to combine outputs of each GPU
+- After that each GPU's Model is updated identically
+- **Important** - This approach requires all of Model weights (aka parameters), Gradients and Adam optimizers to be available in each of the GPUs, thus requiring additional redundant storage in each GPU. The only optimization is happening on saving space on data side due to batching of data
+
+#### Fully Sharded Data Parallel (FSDP) by PyTorch
+- This approach in addition to distributing data in batches similar to that of DDP, it distributes model parameters, graidents and optimizers across multiple GPUs, thus addresses the need for redundant memory case as described above in DDP approach
+- The synchronization step remains same as that of DDP
+- Mechanics:
+    - **Stage 1**: Shards Optimizer States across GPUs. Reduces memory foot print by 4X
+    - **Stage 2**: Shards Gradient across GPUs. Reduces memory foot print by another 2X
+    - **Stage 3**: Shards Parameters across GPUs. Memory foot print reduction is dependent on number of GPUs used. Count of GPUs is the times of reduction
+- Overall memory optimization comes with a trade off with performance, since synchronization and communication between GPUs would create more delay
+
+
 
 ### Scaling Choices
 - To maximize performance (Minimize Loss) of a model, 3 main levers play a role:
@@ -121,6 +141,7 @@
 - Similar to CAP theorem not everything can be achieved once. So to maximize performance two or less of the factors can be focussed upon
 - **Unit of Compute** : Usually represented as 1 Peta-FLOP per day. FLOP is floating point operations
 - This is equivalent of 8 NVIDIA V100 GPUs working in parallel or 2 NVIDIA A100 GPUs
+- For a perspective if a model that has about 3B parameter uses about 100 Petaflop GPU per day to pretrain, a GPT-3 like model which has 175B parameters may take close to 3700 Petaflop GPUs
 - **Chinchilla Model** : Research papers Provides optimum number of parameters and training data volume given a set of computing constraint
     - Data size should be 20 times more than Number of Parameters: `Training Data = 3 x Parameters`
     - LlaMa and Bloomberg GPT are few models those are designed after Chinchilla research
