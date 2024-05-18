@@ -1,6 +1,3 @@
----
-layout: page
----
 # Transformers and LLMs 
 
 ## Text Generation Before Transformers
