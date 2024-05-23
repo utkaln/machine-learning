@@ -1,5 +1,17 @@
 # Transformers and LLMs 
 
+## Life Cycle of a Gen AI Project Lifecycle
+1. **Scope - Define the Usecase**
+2. **Choose Model**
+3. **Adapt and Align Model**
+    - **Prompt Engineering**
+    - Fine-tuning
+    - Align with human feedback
+    - Evaluate
+4. Application Integration
+    - Optimize and deploy model for inference
+    - Augment model and build LLM-powered applications
+
 ## Text Generation Before Transformers
 - **RNN** : 
     - Limitation : To successfully predict required huge scalability
@@ -145,6 +157,9 @@
 
 ### Pre-training for Domain Adaptation
 - If the domain has a niche set of language, for example specific to law practice or medical practice etc. then it is important to pre-train the model using own training data instead of relying on available data from general public domain
+- Example BloombergGPT was pre-trained using domain specific data of 51% of financial data and 49% publicly available data. This model also follows Chinchilla recommendation for count of training data and parameters
 
-
+- To know more more about Fine tuning LLM, continue with following section
+## Finetuning LLMs
+[fine-tune-llms.md](./fine-tune-llms.md)
 

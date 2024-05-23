@@ -9,6 +9,7 @@
     - [Finetune Models](FineTuneModels.md)
     - [Decision Trees](DecisionTrees.md)
   - Unsupervised Learning
+  - [Transformers and LLMs](LLMs.md)
 
 ## Gen AI and LLMs
 - Popular Foundational LLMs are : BLOOM, GPT, LlaMa, FLAN-T5, BERT, PaLM. These are already trained on some data. Hence called base models. More pre training can be done on these
