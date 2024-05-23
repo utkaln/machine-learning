@@ -5,6 +5,5 @@ author:
   email: nayak.utkal@gmail.com
 
 # Build settings
-remote_theme: jekyll/minima
+remote_theme: lewismiddleton/cayman-dark
 markdown: GFM
-theme: jekyll-theme-cayman
