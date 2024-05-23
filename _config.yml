@@ -7,3 +7,4 @@ author:
 # Build settings
 remote_theme: jekyll/minima
 markdown: GFM
+theme: jekyll-theme-cayman
