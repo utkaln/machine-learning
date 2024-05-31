@@ -68,5 +68,27 @@
     - Accuracy(Precision, F1 score), Calibration, Robustness, Fairness, Bias, Toxicity and Efficiency
 - Continues to evolve 
 
+## PEFT (Parameter Efficient Fine Tuning)
+- Since modifying all the parameters will be compute intensive, hence most PEFT techniques freeze the original model weights. Instead they either modify a subset of relevant parameters or add new small set of parameters 
+-  Number of trained parameters are about 15% to 20%, thus can be trained on one GPU
+- Because original parameters are mostly untouched, it avoids the issue of catastrophic forgetting
+- New parameters are combined with original LLM parameters during inference time
+- PEFTs comes up with trade offs, hence a model priorizes the concern from one of following aspects:
+    - **Parameter Efficiency**
+    - **Memory Efficiency**
+    - **Training Speed**
+    - **Model Performance**
+    - **Inference Costs**
+
+### PEFT Methods
+- **Selective PEFT Method**: Subset of initial set of parameters are fine tuned
+- **Reparameterization PEFT Method**: Original parameters used with lowered weights
+- **Additive PEFT Method** : Add new parameters either by adding after the self attention phase in encoder or decoder. Or by using another method known as soft prompts. **Prompt Tuning** is a method of soft prompt type of PEFT technique
+
+
+
+
+ 
+
 
 
