@@ -85,10 +85,11 @@
 - **Reparameterization PEFT Method**: Original parameters used with lowered weights
 - **Additive PEFT Method** : Add new parameters either by adding after the self attention phase in encoder or decoder. Or by using another method known as soft prompts. **Prompt Tuning** is a method of soft prompt type of PEFT technique
 
+### LoRA (Low Rank Adaptation) of LLMs
+- Type of Reparameterization 
 
-
-
- 
-
-
-
+### Soft-prompt
+- This is different than prompt engineering. In Prompt Engineering more tokens are provided to the pre-trained model. This approach requires additional requirement to store the prompt in the context
+- Soft prompt addresses this issue by freezing the weights of the original parameters, and adding only few virtual tokens, which are not part of standard vector embeddings. 
+- Each type of task can have its own individual set of soft prompts on top of the same pre-trained model, thus addressing the catastrophic forget
+- The mechanism is to prepend the softprompt to the pre-defined tokens
